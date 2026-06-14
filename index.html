@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Firewall Risk Review | AI-Assisted Firewall Policy Risk Reports</title>
+  <meta name="description" content="AI-assisted firewall risk review reports for MSPs, MSSPs, and regulated teams. Turn firewall rule exports into client-ready risk, compliance, and remediation reports." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://FirewallRiskReview.com/" />
+  <meta property="og:title" content="Firewall Risk Review" />
+  <meta property="og:description" content="AI-assisted firewall policy risk reports for MSPs, MSSPs, and regulated teams." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://FirewallRiskReview.com/" />
+  <meta name="theme-color" content="#0f172a" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%230f172a'/%3E%3Cpath d='M50 12 82 25v22c0 20-13 34-32 41-19-7-32-21-32-41V25l32-13Z' fill='%2338bdf8'/%3E%3Cpath d='M35 51h30M38 39h24M41 63h18' stroke='white' stroke-width='7' stroke-linecap='round'/%3E%3C/svg%3E" />
+  <style>
+    :root {
+      --bg: #07111f;
+      --panel: #0f172a;
+      --panel-2: #111c31;
+      --text: #e5eefb;
+      --muted: #9fb1c7;
+      --line: rgba(148, 163, 184, .22);
+      --accent: #38bdf8;
+      --accent-2: #22c55e;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --shadow: 0 24px 70px rgba(0, 0, 0, .34);
+      --radius: 22px;
+      --max: 1160px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, rgba(56,189,248,.18), transparent 38%), radial-gradient(circle at top right, rgba(34,197,94,.09), transparent 35%), var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(var(--max), calc(100% - 40px)); margin: 0 auto; }
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(18px);
+      background: rgba(7, 17, 31, .78);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-inner { display: flex; justify-content: space-between; align-items: center; padding: 16px 0; gap: 20px; }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; letter-spacing: -.02em; }
+    .mark { width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; background: linear-gradient(135deg, var(--accent), #2563eb); color: white; font-weight: 900; box-shadow: 0 10px 30px rgba(56,189,248,.25); }
+    .nav-links { display: flex; align-items: center; gap: 22px; font-size: 14px; color: var(--muted); }
+    .nav-links a:hover { color: var(--text); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; padding: 12px 18px; border-radius: 999px; background: var(--accent); color: #03101c; font-weight: 800; border: 1px solid rgba(255,255,255,.08); box-shadow: 0 16px 40px rgba(56,189,248,.22); }
+    .btn.secondary { background: transparent; color: var(--text); border: 1px solid var(--line); box-shadow: none; }
+    .hero { padding: 86px 0 56px; }
+    .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 42px; align-items: center; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 8px; color: #bae6fd; border: 1px solid rgba(56,189,248,.26); background: rgba(56,189,248,.08); padding: 7px 11px; border-radius: 999px; font-size: 13px; font-weight: 700; }
+    h1 { font-size: clamp(42px, 6vw, 76px); line-height: .96; letter-spacing: -.06em; margin: 22px 0; }
+    h2 { font-size: clamp(30px, 4vw, 46px); line-height: 1.05; letter-spacing: -.04em; margin: 0 0 16px; }
+    h3 { margin: 0 0 10px; font-size: 20px; letter-spacing: -.02em; }
+    p { color: var(--muted); margin: 0; }
+    .lead { font-size: 20px; max-width: 720px; }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 30px; }
+    .trust-row { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 28px; color: var(--muted); font-size: 14px; }
+    .trust-row span { border: 1px solid var(--line); border-radius: 999px; padding: 8px 11px; background: rgba(255,255,255,.03); }
+    .card { background: linear-gradient(180deg, rgba(17, 28, 49, .96), rgba(15, 23, 42, .96)); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
+    .score-card { padding: 24px; }
+    .score-header { display: flex; justify-content: space-between; align-items: start; gap: 14px; margin-bottom: 22px; }
+    .pill { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; padding: 6px 9px; border-radius: 999px; background: rgba(34,197,94,.12); color: #bbf7d0; border: 1px solid rgba(34,197,94,.25); }
+    .metric-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .metric { padding: 16px; border: 1px solid var(--line); border-radius: 16px; background: rgba(255,255,255,.035); }
+    .metric strong { display: block; font-size: 32px; line-height: 1; letter-spacing: -.04em; }
+    .metric span { color: var(--muted); font-size: 13px; }
+    .finding { margin-top: 12px; padding: 14px; border: 1px solid var(--line); border-radius: 16px; background: rgba(255,255,255,.03); display: grid; grid-template-columns: auto 1fr; gap: 12px; }
+    .badge { width: 12px; height: 12px; border-radius: 50%; margin-top: 7px; background: var(--danger); }
+    .badge.high { background: var(--warning); }
+    section { padding: 68px 0; }
+    .section-head { display: flex; justify-content: space-between; gap: 30px; align-items: end; margin-bottom: 28px; }
+    .section-head p { max-width: 620px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    .feature { padding: 24px; }
+    .icon { width: 42px; height: 42px; border-radius: 14px; display: grid; place-items: center; background: rgba(56,189,248,.1); border: 1px solid rgba(56,189,248,.2); color: #bae6fd; margin-bottom: 18px; font-weight: 900; }
+    .steps { counter-reset: steps; }
+    .step { padding: 24px; position: relative; }
+    .step:before { counter-increment: steps; content: counter(steps); width: 38px; height: 38px; display: grid; place-items: center; border-radius: 50%; background: var(--accent); color: #03101c; font-weight: 900; margin-bottom: 16px; }
+    .pricing { padding: 34px; display: grid; grid-template-columns: .8fr 1.2fr; gap: 28px; align-items: center; }
+    .price { font-size: 52px; font-weight: 900; letter-spacing: -.05em; color: #fff; }
+    ul { margin: 14px 0 0; padding-left: 20px; color: var(--muted); }
+    li { margin: 8px 0; }
+    .form-card { padding: 30px; }
+    form { display: grid; gap: 14px; }
+    label { font-size: 13px; font-weight: 800; color: #cbd5e1; }
+    input, textarea, select { width: 100%; margin-top: 7px; border: 1px solid var(--line); background: rgba(255,255,255,.045); color: var(--text); padding: 13px 14px; border-radius: 14px; font: inherit; outline: none; }
+    textarea { min-height: 110px; resize: vertical; }
+    input:focus, textarea:focus, select:focus { border-color: rgba(56,189,248,.65); box-shadow: 0 0 0 4px rgba(56,189,248,.12); }
+    .small { font-size: 13px; color: var(--muted); }
+    .footer { padding: 34px 0; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    .note { border-left: 3px solid var(--accent); padding: 14px 16px; background: rgba(56,189,248,.06); border-radius: 12px; color: #cfe9fb; margin-top: 18px; }
+    @media (max-width: 880px) {
+      .hero-grid, .grid-3, .grid-2, .pricing { grid-template-columns: 1fr; }
+      .section-head { display: block; }
+      .nav-links { display: none; }
+      .hero { padding-top: 58px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="#top" aria-label="Firewall Risk Review home">
+        <span class="mark">FR</span>
+        <span>Firewall Risk Review</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="#deliverables">Deliverables</a>
+        <a href="#process">Process</a>
+        <a href="#pilot">Pilot</a>
+        <a class="btn" href="#request">Request Sample Report</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">AI-assisted firewall policy risk reports for MSPs & MSSPs</div>
+          <h1>Turn firewall rule exports into client-ready risk reports.</h1>
+          <p class="lead">Firewall Risk Review helps MSPs, MSSPs, and regulated teams identify risky rules, stale access, over-permissive policies, missing justification, and least-privilege gaps — without hiring more security engineers.</p>
+          <div class="hero-actions">
+            <a class="btn" href="#request">Request Sample Report</a>
+            <a class="btn secondary" href="#pilot">View Pilot Offer</a>
+          </div>
+          <div class="trust-row" aria-label="Use cases">
+            <span>White-label ready</span>
+            <span>Quarterly reviews</span>
+            <span>Audit readiness</span>
+            <span>Firewall cleanup</span>
+          </div>
+        </div>
+        <aside class="card score-card" aria-label="Sample report preview">
+          <div class="score-header">
+            <div>
+              <h3>Sample Risk Summary</h3>
+              <p>AI-assisted review output, validated by security expertise.</p>
+            </div>
+            <span class="pill">Report Ready</span>
+          </div>
+          <div class="metric-grid">
+            <div class="metric"><strong>4</strong><span>Critical findings</span></div>
+            <div class="metric"><strong>7</strong><span>High-risk rules</span></div>
+            <div class="metric"><strong>11</strong><span>Medium-risk rules</span></div>
+            <div class="metric"><strong>28</strong><span>Low / informational</span></div>
+          </div>
+          <div class="finding"><span class="badge"></span><div><strong>Public RDP exposure</strong><p>Inbound administrative access from any internet source.</p></div></div>
+          <div class="finding"><span class="badge"></span><div><strong>Any service to production</strong><p>Broad internal access violates least-privilege standards.</p></div></div>
+          <div class="finding"><span class="badge high"></span><div><strong>Stale vendor VPN rule</strong><p>No observed usage in 180+ days; requires validation.</p></div></div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="deliverables">
+      <div class="container">
+        <div class="section-head">
+          <h2>What your MSP receives</h2>
+          <p>A fixed-scope, client-ready deliverable your team can use for security assessments, quarterly business reviews, compliance readiness, and firewall cleanup planning.</p>
+        </div>
+        <div class="grid-3">
+          <div class="card feature"><div class="icon">1</div><h3>Executive PDF Report</h3><p>Clear risk summary, critical findings, business impact, and prioritized recommendations for leadership and client stakeholders.</p></div>
+          <div class="card feature"><div class="icon">2</div><h3>Rule-Level Risk Analysis</h3><p>Detection of any/any exposure, broad services, risky admin ports, stale rules, duplicate patterns, and missing justification.</p></div>
+          <div class="card feature"><div class="icon">3</div><h3>Remediation Tracker</h3><p>Excel-ready action tracker with risk level, issue, recommendation, owner, priority, status, and due date fields.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container grid-2">
+        <div class="card feature">
+          <div class="icon">✓</div>
+          <h3>Built for MSPs and MSSPs</h3>
+          <p>Use the report as a paid client add-on, compliance review, firewall cleanup entry point, or recurring quarterly security service.</p>
+          <ul>
+            <li>White-label delivery available</li>
+            <li>Designed for client conversations</li>
+            <li>Useful for QBRs and renewal discussions</li>
+          </ul>
+        </div>
+        <div class="card feature">
+          <div class="icon">⚡</div>
+          <h3>AI-assisted, not AI-only</h3>
+          <p>AI accelerates analysis and reporting, but recommendations are structured around practical firewall governance, least-privilege principles, and audit defensibility.</p>
+          <div class="note">Clients remain responsible for validating business need and approving production firewall changes.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="process">
+      <div class="container">
+        <div class="section-head">
+          <h2>Simple delivery process</h2>
+          <p>No platform migration. No complex integration. Start with a firewall rule export and receive a polished risk review package.</p>
+        </div>
+        <div class="grid-3 steps">
+          <div class="card step"><h3>Send a rule export</h3><p>Provide a CSV or export containing rule name, source, destination, service, action, hit count, last used date, owner, and business justification where available.</p></div>
+          <div class="card step"><h3>We analyze risk</h3><p>Rules are reviewed for over-permissive access, stale usage, risky services, missing ownership, administrative exposure, and least-privilege gaps.</p></div>
+          <div class="card step"><h3>Receive the report</h3><p>Your MSP receives a client-ready PDF report and remediation tracker suitable for executive review and technical cleanup planning.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pilot">
+      <div class="container">
+        <div class="card pricing">
+          <div>
+            <div class="eyebrow">Pilot offer</div>
+            <h2>Test with one client firewall.</h2>
+            <p>Use the first review to validate the report format, client value, and resale potential before making it a recurring offer.</p>
+          </div>
+          <div>
+            <div class="price">$1,500</div>
+            <p>Introductory pilot for one firewall policy export, up to 500 rules.</p>
+            <ul>
+              <li>Executive firewall risk review report</li>
+              <li>Rule-level findings and risk scoring</li>
+              <li>Excel remediation tracker</li>
+              <li>Typical turnaround: 5 business days</li>
+              <li>White-label option available</li>
+            </ul>
+            <div class="hero-actions"><a class="btn" href="#request">Request Sample Report</a></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="request">
+      <div class="container grid-2">
+        <div>
+          <h2>Request the sample report</h2>
+          <p>Send a quick note and we’ll share a sample firewall risk review package showing the executive summary, technical findings, and remediation tracker format.</p>
+          <div class="note">To activate this form on Cloudflare Pages, connect it to Formspree, Tally, Basin, or your preferred form backend. Until then, replace the form action with your chosen endpoint.</div>
+        </div>
+        <div class="card form-card">
+          <form action="https://formspree.io/f/REPLACE_WITH_YOUR_FORM_ID" method="POST">
+            <label>Work email
+              <input type="email" name="email" placeholder="name@company.com" required />
+            </label>
+            <label>Name
+              <input type="text" name="name" placeholder="Your name" required />
+            </label>
+            <label>Company type
+              <select name="company_type" required>
+                <option value="">Select one</option>
+                <option>MSP</option>
+                <option>MSSP</option>
+                <option>Security consultant</option>
+                <option>Regulated internal IT/security team</option>
+                <option>Other</option>
+              </select>
+            </label>
+            <label>Message
+              <textarea name="message" placeholder="Tell us what type of firewall environments you support."></textarea>
+            </label>
+            <button class="btn" type="submit">Request Sample Report</button>
+            <p class="small">No sensitive firewall data is required to request the sample report.</p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span>© <span id="year"></span> Firewall Risk Review. All rights reserved.</span>
+      <span>AI-assisted firewall risk reporting powered by PolicyRisk AI.</span>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
